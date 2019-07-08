@@ -3,7 +3,6 @@ package basic_thread_synchronization.demo1;
 import java.util.Scanner;
 
 class Processor extends Thread {
-
     private volatile boolean running = true;
 
     public void run() {
