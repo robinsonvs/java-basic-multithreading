@@ -1,4 +1,4 @@
-package starting_threads.demo3;
+package part_01_starting_threads.demo3;
 
 public class App {
     public static void main(String[] args) {

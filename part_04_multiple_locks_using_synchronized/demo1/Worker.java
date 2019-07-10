@@ -1,6 +1,4 @@
-package multiple_locks_using_synchronized.demo1;
-
-import com.sun.corba.se.impl.ior.OldJIDLObjectKeyTemplate;
+package part_04_multiple_locks_using_synchronized.demo1;
 
 import java.util.ArrayList;
 import java.util.List;

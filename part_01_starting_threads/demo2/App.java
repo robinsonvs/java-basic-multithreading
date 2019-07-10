@@ -1,7 +1,6 @@
-package starting_threads.demo1;
+package part_01_starting_threads.demo2;
 
-class Runner extends Thread {
-    @Override
+class Runner implements Runnable {
     public void run() {
         for (int i = 0; i < 10; i++) {
             System.out.println("Hello = " + i);
@@ -17,10 +16,10 @@ class Runner extends Thread {
 
 public class App {
     public static void main(String[] args) {
-        Runner runner = new Runner();
-        runner.start();
+        Thread t1 = new Thread(new Runner());
+        Thread t2 = new Thread(new Runner());
 
-        Runner runner2 = new Runner();
-        runner2.start();
+        t1.start();
+        t2.start();
     }
 }

@@ -1,4 +1,4 @@
-package thread_pools.demo1;
+package part_05_thread_pools.demo1;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -1,4 +1,4 @@
-package the_synchronized_keyword.demo1;
+package part_03_the_synchronized_keyword.demo1;
 
 public class App {
     //cache dont work

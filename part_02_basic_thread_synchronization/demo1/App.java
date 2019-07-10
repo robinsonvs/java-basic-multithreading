@@ -1,4 +1,4 @@
-package basic_thread_synchronization.demo1;
+package part_02_basic_thread_synchronization.demo1;
 
 import java.util.Scanner;
 
