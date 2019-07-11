@@ -26,13 +26,15 @@ class Processor implements Runnable {
 
 public class App {
     public static void main(String[] args) {
-        CountDownLatch latch = new CountDownLatch(3);
+        CountDownLatch latch = new CountDownLatch(10);
 
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             executor.submit(new Processor(latch));
         }
+
+        executor.shutdown();
 
         try {
             latch.await();
