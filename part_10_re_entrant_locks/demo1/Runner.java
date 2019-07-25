@@ -33,7 +33,7 @@ public class Runner {
     }
 
     public void secondThread() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         lock.lock();
 
         System.out.println("Press the return key");
