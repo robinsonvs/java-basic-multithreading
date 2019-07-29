@@ -1,2 +1,2 @@
 ## Study Java Basic Multithreading
-Cave of programming [Java-MultiThreading](http://www.caveofprogramming.com) videos.
+Cave of programming [Java-MultiThreading](http://www.caveofprogramming.com).
