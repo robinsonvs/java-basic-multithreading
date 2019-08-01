@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Processor {
+
     private LinkedList<Integer> list = new LinkedList<Integer>();
     private final int LIMIT = 10;
     private Object lock = new Object();
@@ -14,12 +15,13 @@ public class Processor {
         while(true) {
 
             synchronized (lock) {
-
                 while (list.size() == LIMIT) {
-                    lock.wait();
+                    lock.wait();// wait() is also true
                 }
 
-                list.add(value++);
+                list.add(value);
+                System.out.println("Producer added: " + value + " queue size is " + list.size());
+                value++;
                 lock.notify();
             }
         }
@@ -31,18 +33,16 @@ public class Processor {
         while(true) {
 
             synchronized (lock) {
-
                 while (list.size() == 0) {
                     lock.wait();
                 }
 
-                System.out.println("List size is : " + list.size());
                 int value = list.removeFirst();
-                System.out.println("; value is : " + value);
+                System.out.print("Removed value by consumer is: " + value);
+                System.out.println(" Now list size is: " + list.size());
                 lock.notify();
             }
-
-            Thread.sleep(random.nextInt(1000));
+            Thread.sleep(random.nextInt(1000));//force producer fill the queue to LIMIT_SIZE
         }
     }
 }
