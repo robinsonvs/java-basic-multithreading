@@ -1,17 +1,73 @@
 package part_10_re_entrant_locks.demo1;
 
+/**
+ *
+ * the {@link java.util.concurrent.locks.ReentrantLock} class in Java as an
+ * alternative to synchronized code blocks.
+ * <br>
+ * {@link java.util.concurrent.locks.ReentrantLock}s let you do all the
+ * stuff that you can do with {@code synchronized}, {@link Object#wait()} and
+ * {@link Object#notify()}, plus some more stuff. Besides that may come in
+ * handy from time to time.
+ * <br><br>
+ * Source:<em>
+ * http://docs.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/locks/ReentrantLock.html
+ * </em>
+ * <br><br>
+ * {@link java.util.concurrent.locks.ReentrantLock} Extended capabilities
+ * include:
+ * <br>
+ * <ul>
+ * <li>
+ * The ability to have more than one {@link java.util.concurrent.locks.Condition}
+ * variable per monitor.
+ * </li>
+ * <li>Monitors that use the synchronized keyword can only have one. This means
+ * {@link java.util.concurrent.locks.ReentrantLock}s support more than one
+ * {@link Object#wait()}/{@link Object#notify()} queue.
+ * </li>
+ * <li>
+ * The ability to make the lock "fair".
+ * <em>
+ * "[fair] locks favor granting access to the longest-waiting
+ * thread. Otherwise this lock does not guarantee any particular access order."
+ * </em>
+ * </li>
+ * <li>Synchronized blocks are unfair.</li>
+ * <li>The ability to check if the lock is being
+ * held.</li>
+ * <li>The ability to get the list of threads waiting on the lock.</li>
+ * </ul>
+ * <br><br>
+ * The disadvantages of {@link java.util.concurrent.locks.ReentrantLock}s are:
+ * <br>
+ * <ul>
+ * <li>Need to add import statement.</li>
+ * <li>Need to wrap lock acquisitions in a try/finally block. This makes it more
+ * ugly than the synchronized keyword.</li>
+ * <li>The synchronized keyword can be put in method definitions which avoids
+ * the need for a block which reduces nesting.</li>
+ * </ul>
+ * <br><br>
+ * For more complete comparison of
+ * {@link java.util.concurrent.locks.ReentrantLock}s and {@code synchronized}
+ * see:<em>
+ * http://guruzon.com/1/concurrency/explicit-lock-locking/difference-between-synchronized-and-reentrantlock-in-java
+ * </em>
+ * <br><br>
+ *
+ *
+ */
 public class App {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         final Runner runner = new Runner();
 
         Thread t1 = new Thread(new Runnable() {
             public void run() {
                 try {
                     runner.firstThread();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                } catch (InterruptedException ignored) {}
             }
         });
 
@@ -19,9 +75,7 @@ public class App {
             public void run() {
                 try {
                     runner.secondThread();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                } catch (InterruptedException ignored) {}
             }
         });
 
