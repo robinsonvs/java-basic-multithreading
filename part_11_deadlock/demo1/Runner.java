@@ -13,6 +13,10 @@ public class Runner {
     private Lock lock1 = new ReentrantLock();
     private Lock lock2 = new ReentrantLock();
 
+
+    //don't hold several locks at once. If you do,
+    // always acquire the locks in the same order
+    //try to get the both locks
     private void acquireLocks(Lock firstLock, Lock secondLock) throws InterruptedException {
         while (true) {
             //Acquire locks
@@ -20,6 +24,14 @@ public class Runner {
             boolean gotSecondLock = false;
 
             try {
+
+                /**
+                 * tryLock() which will only acquire a lock if it’s available
+                 * and not already acquired by another thread and tryLock(long
+                 * time,TimeUnit unit), which will try to acquire a lock and, if
+                 * it's unavailable wait for the specified timer to expire
+                 * before giving up
+                 */
                 gotFirstLock = firstLock.tryLock();
                 gotSecondLock = secondLock.tryLock();
             } finally {
@@ -41,11 +53,11 @@ public class Runner {
         }
     }
 
+    //run
     public void firstThread() throws InterruptedException {
         Random random = new Random();
 
         for (int i = 0; i < 10000; i++) {
-
             acquireLocks(lock1, lock2);
 
             try {
@@ -57,11 +69,11 @@ public class Runner {
         }
     }
 
+    //run
     public void secondThread() throws InterruptedException {
         Random random = new Random();
 
         for (int i = 0; i < 10000; i++) {
-
             acquireLocks(lock2, lock1);
 
             try {
@@ -73,6 +85,7 @@ public class Runner {
         }
     }
 
+    //When both threads finish execution, finished runs
     public void finished() {
         System.out.println("Account 1 balance: " + acc1.getBalance());
         System.out.println("Account 2 balance: " + acc2.getBalance());
